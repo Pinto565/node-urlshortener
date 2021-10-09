@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const shortUrl = require("./models/shortUrl");
 const app = express();
 
+const PORT = process.env.PORT || 5050;
+
 mongoose
   .connect(
     "mongodb+srv://pinto:zxcvbnm%40123@cluster0.tb80h.mongodb.net/urlShortener",
@@ -36,4 +38,6 @@ app.get("/:shortUrl", async (req, res) => {
   res.redirect(shortUrls.full)
 });
 
-app.listen(process.env.PORT || 5000);
+app.listen(PORT , () => {
+  `App is Running on ${PORT}`
+});
