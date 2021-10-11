@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const shortUrl = require("./models/shortUrl");
 const app = express();
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(
@@ -25,19 +25,21 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/shortUrls", (req, res) => {
- shortUrl.create({ full: req.body.fullUrl });
+  shortUrl.create({ full: req.body.fullUrl });
   res.redirect("/");
 });
 
 app.get("/:shortUrl", async (req, res) => {
   const shortUrls = await shortUrl.findOne({ short: req.params.shortUrl });
-  if (shortUrls == null) return res.sendStatus(404)
-
-  shortUrls.clicks++
-  shortUrls.save()
-  res.redirect(shortUrls.full)
+  if (shortUrls == null) {
+    return res.sendStatus(404);
+  } else {
+    shortUrls.clicks++;
+    shortUrls.save();
+    res.redirect(shortUrls.full);
+  }
 });
 
-app.listen(PORT , () => {
-  `App is Running on ${PORT}`
+app.listen(PORT, () => {
+  `App is Running on ${PORT}`;
 });
