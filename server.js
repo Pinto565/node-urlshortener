@@ -19,7 +19,11 @@ mongoose
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
+  res.status(404).send("Url shortener is Working");
+});
+
+app.get("/auth/pattarai7986", async (req, res) => {
   const shortUrls = await shortUrl.find();
   res.render("index", { shortUrls: shortUrls });
 });
