@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(
-    "mongodb+srv://pinto:zxcvbnm%40123@cluster0.tb80h.mongodb.net/urlShortener",
+    "",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
